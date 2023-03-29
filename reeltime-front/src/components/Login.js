@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import './Login.css';
+import { Link } from "react-router-dom";
+
+
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -32,6 +35,9 @@ function Login() {
           />
         </label>
         <br />
+        <p className="forgot-password text-right">
+          Not a member <Link to="/Signup">Sign up?</Link>
+        </p>
         <button type="submit">Login</button>
       </form>
     </div>
