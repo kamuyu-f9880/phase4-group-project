@@ -43,7 +43,7 @@ class DirectorsController < ApplicationController
     private
   
     def director_params
-      params.require(:director).permit(:name, :nationality, :birth_date)
+      params.require(:director).permit(:name)
     end
 end
   
