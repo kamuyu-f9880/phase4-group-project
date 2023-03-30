@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 function Signup() {
@@ -7,9 +7,17 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  function handleClick(){
+
+    navigate("/login")
+
+  }
 
   return (
     <div>
@@ -42,7 +50,7 @@ function Signup() {
           />
         </label>
         <br />
-        <button type="submit">Signup</button>
+        <button onClick={handleClick} type="submit">Signup</button>
       </form>
       <p>
         Already have an account? <Link to="/Login">Login</Link>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Login.css';
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 
@@ -8,10 +8,19 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
   };
+  
+
+function handleClick(){
+    navigate("/home","/searchbox")
+}
+    
+ 
 
   return (
     <div>
@@ -38,7 +47,7 @@ function Login() {
         <p className="forgot-password text-right">
           Not a member <Link to="/Signup">Sign up?</Link>
         </p>
-        <button type="submit">Login</button>
+        <button onClick={handleClick} type="submit">Login</button>
       </form>
     </div>
   );
