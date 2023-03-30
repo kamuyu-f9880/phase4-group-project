@@ -8,6 +8,7 @@
 require 'faker'
 
 # Create 10 directors with fake data
+puts "Creating directors..."
 10.times do
   Director.create(
     name: Faker::Name.name,
@@ -17,6 +18,7 @@ require 'faker'
 end
 
 # Create 20 actors with fake data
+puts "Creating actors..."
 20.times do
   Actor.create(
     name: Faker::Name.name,
@@ -26,6 +28,7 @@ end
 end
 
 # Create 5 admin users with fake data
+
 5.times do
   Admin.create(
     email: Faker::Internet.email,
@@ -35,6 +38,7 @@ end
 end
 
 # Create 50 movies with fake data
+puts "Creating movies..."
 50.times do
   movie = Movie.create(
     title: Faker::Movie.title,
@@ -51,6 +55,7 @@ end
   movie.actors << Actor.order("RANDOM()").limit(rand(1..10))
   
   # Create 1 to 10 reviews for each movie
+  puts "Creating reviews..."
   rand(1..10).times do
     Review.create(
       movie: movie,
