@@ -1,12 +1,11 @@
 class Movie < ApplicationRecord
-    belongs_to :director
-    has_many :actor_movies
-    has_many :actors, through: :actor_movies
-    has_many :reviews
-    has_many :users, through: :reviews
-  
-    validates :title, presence: true
-    validates :release_date, presence: true
-    validates :plot_summary, presence: true
-    validates :director, presence: true
+  belongs_to :director
+  has_many :reviews
+  has_many :movie_actors
+  has_many :actors, through: :movie_actors
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :year, presence: true
+  validates :duration, presence: true
+  validates :rating, presence: true
 end

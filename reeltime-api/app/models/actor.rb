@@ -1,6 +1,5 @@
 class Actor < ApplicationRecord
-    has_many :actormovies
-    has_many :movies, through: :actormovies
-  
+    has_many :movie_actors
+    has_many :movies, through: :movie_actors
     validates :name, presence: true
 end
