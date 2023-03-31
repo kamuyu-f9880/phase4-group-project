@@ -12,8 +12,6 @@ puts "Creating directors..."
 10.times do
   Director.create(
     name: Faker::Name.name,
-    bio: Faker::Lorem.paragraph,
-    image: Faker::LoremFlickr.image
   )
 end
 
@@ -22,17 +20,16 @@ puts "Creating actors..."
 20.times do
   Actor.create(
     name: Faker::Name.name,
-    bio: Faker::Lorem.paragraph,
-    image: Faker::LoremFlickr.image
+
   )
 end
 
-# Create 5 admin users with fake data
+# Create 1 admin user with fake data
 
-5.times do
+1.times do
   Admin.create(
     email: Faker::Internet.email,
-    username: Faker::Internet.username,
+    name: Faker::Internet.username,
     password: Faker::Internet.password
   )
 end
@@ -43,9 +40,9 @@ puts "Creating movies..."
   movie = Movie.create(
     title: Faker::Movie.title,
     description: Faker::Lorem.paragraph,
-    release_date: Faker::Date.between(from: '1990-01-01', to: '2023-03-29'),
-    image: Faker::LoremFlickr.image,
-    price: Faker::Commerce.price(range: 0..50.0)
+    year: Faker::Date.between(from: '1990-01-01', to: '2023-03-29'),
+    rating: rand(1..5),
+    duration: Faker::Commerce.price(range: 0..50.0)
   )
   
   # Assign 1 to 5 directors to each movie
