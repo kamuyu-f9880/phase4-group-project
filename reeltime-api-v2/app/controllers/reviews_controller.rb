@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
  # GET /movies/:movie_id/reviews
- def index
+  def index
     reviews = Movie.reviews
     render json: reviews
   end

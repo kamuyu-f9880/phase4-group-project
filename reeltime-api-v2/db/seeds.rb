@@ -38,7 +38,7 @@ end
 # Create 50 movies with fake data
 puts "Creating movies..."
 10.times do
-  movie = Movie.create(
+  Movie.create(
     title: Faker::Movie.title,
     description: Faker::Lorem.paragraph,
     
