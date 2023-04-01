@@ -1,32 +1,51 @@
 class ReviewsController < ApplicationController
- # GET /movies/:movie_id/reviews
+  before_action :set_review, only: [:show, :update, :destroy]
+
+  # GET /reviews
   def index
-    reviews = Movie.reviews
-    render json: reviews
+    reviews = Review.all
+    render json: reviews, each_serializer: ReviewSerializer
   end
 
-  # GET /movies/:movie_id/reviews/:id
+  # GET /reviews/1
   def show
-    render json: {
-      user_id: reviews.user_id,
-      name: reviews.name,
-      comments: reviews.comments
-    }
+    render json: review, serializer: ReviewSerializer
   end
 
-  # POST /movies/:movie_id/reviews
+  # POST /reviews
   def create
-    review = current_user.reviews.new(review_params)
-    review.movie = movie
+    review = Review.new(review_params)
 
     if review.save
-      render json: review, status: :created
+      render json: review, status: :created, serializer: ReviewSerializer
     else
       render json: review.errors, status: :unprocessable_entity
     end
+  end
 
-    def user_params
-      params.require(:review).permit(:user_id, :movie_id, :comments, :rating)
+  # PATCH/PUT /reviews/1
+  def update
+    if review.update(review_params)
+      render json: review, serializer: ReviewSerializer
+    else
+      render json: review.errors, status: :unprocessable_entity
     end
   end
+
+  # DELETE /reviews/1
+  def destroy
+    review.destroy
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_review
+      review = Review.find(params[:id])
+      render json: review
+    end
+
+    # Only allow a list of trusted parameters through.
+    def review_params
+      params.require(:review).permit(:user_id, :movie_id, :rating, :comment)
+    end
 end

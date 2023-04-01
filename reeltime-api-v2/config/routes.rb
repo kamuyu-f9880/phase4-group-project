@@ -1,18 +1,17 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :movies do
-    resources :reviews
+  resources :movies, only: [:index, :show, :create, :update, :destroy] do
+    resources :reviews, only: [:index, :create, :destroy]
   end
 
-  resources :actors
-  resources :directors
-  resources :users, only: [:create]
+  resources :actors, only: [:index, :show]
 
-  get 'movies', to: 'movies#index'
-  get 'actors', to: 'actors#index'
-  get 'users', to: 'users#index'
-  get 'reviews', to: 'reviews#index'
+  resources :users, only: [:create, :update, :destroy] do
+    resources :movies, only: [:index], controller: 'users/movies'
+  end
 
+  resources :sessions, only: [:create, :destroy]
+  get '/authenticated', to: 'sessions#authenticated'
   
 
   # Defines the root path route ("/")
