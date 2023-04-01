@@ -1,13 +1,17 @@
 class ReviewsController < ApplicationController
  # GET /movies/:movie_id/reviews
  def index
-    reviews = movie.reviews
+    reviews = Movie.reviews
     render json: reviews
   end
 
   # GET /movies/:movie_id/reviews/:id
   def show
-    render json: review
+    render json: {
+      user_id: reviews.user_id,
+      name: reviews.name,
+      comments: reviews.comments
+    }
   end
 
   # POST /movies/:movie_id/reviews
@@ -25,3 +29,4 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:user_id, :movie_id, :comments, :rating)
     end
   end
+end
