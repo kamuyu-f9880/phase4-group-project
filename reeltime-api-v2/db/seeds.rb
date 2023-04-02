@@ -8,41 +8,67 @@
 
 require 'faker'
 
-# Create 10 directors with fake data
-puts "Creating directors..."
-10.times do
-  Director.create(
-    name: Faker::Name.name,
+# Destroy all existing records before seeding
+puts "Destroying old records..."
+Movie.destroy_all
+Director.destroy_all
+Actor.destroy_all
+Review.destroy_all
+User.destroy_all
+
+# Generate fake users
+puts "Creating users..."
+5.times do
+  User.create!(
+    username: Faker::Name.name,
+    email: Faker::Internet.unique.email,
+    password: "password",
   )
 end
 
-# Create 20 actors with fake data
-puts "Creating actors..."
+# Generate fake movies with associated directors and actors
+puts "Generating fake movies..."
+50.times do
+  Movie.create!(
+    title: Faker::Movie.unique.title,
+    description: Faker::Lorem.paragraph,
+  )
+end
+
+# Generate fake reviews with associated movies and users
+puts "Generating fake reviews..."
+200.times do
+  Review.create!(
+    comments: Faker::Lorem.paragraph,
+    rating: rand(1..5),
+    movie_id: Movie.all.sample,
+    user_id: User.all.sample
+  )
+end
+
+# Generate fake directors
+puts "Generating fake directors..."
+5.times do
+  Director.create!(
+    name: Faker::Name.unique.name,
+  )
+end
+
+# Generate fake actors
+puts "Generating fake actors..."
 20.times do
-  Actor.create(
-    name: Faker::Name.name,
-
+  Actor.create!(
+    name: Faker::Name.unique.name,
   )
 end
+
+puts "Seeding done!"
 
 # Create 1 admin user with fake data
-puts "Creating users..."
-10.times do
-  User.create(
-    email: Faker::Internet.email,
-    username: Faker::Internet.username,
-    password: Faker::Internet.password
-  )
-end
+
 
 # Create 50 movies with fake data
-puts "Creating movies..."
-10.times do
-  Movie.create(
-    title: Faker::Movie.title,
-    description: Faker::Lorem.paragraph,
-    
-  )
+
   
   # Assign 1 to 5 directors to each movie
   # movie.director << Director.order("RANDOM()").limit(rand(1..5))
@@ -51,14 +77,5 @@ puts "Creating movies..."
   # movie.actor << Actor.order("RANDOM()").limit(rand(1..10))
   
   # Create 1 to 10 reviews for each movie
-  puts "Creating reviews..."
-  rand(1..10).times do
-    Review.create(
-      movie_id: rand(1..10),
-      user_id: rand(1..10),
-      comments: Faker::Lorem.paragraph,
-      rating: rand(1..5)
-    )
-  end
-end
+
 
