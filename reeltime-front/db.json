@@ -1,0 +1,44 @@
+{
+  "employee": [
+    {
+      "id": 1,
+      "name": "One Piece",
+      "email": "Adventure",
+      "phone": "July 19, 1997"
+    },
+    {
+      "id": 2,
+      "name": "Creed III",
+      "email": "Action",
+      "phone": "March 3rd, 2023"
+    },
+    {
+      "name": "John Wick Chapter 4",
+      "email": "Action",
+      "phone": "March 24th, 2023",
+      "active": true,
+      "id": 3
+    },
+    {
+      "name": "Blackout",
+      "email": "Action",
+      "phone": "October 12th, 2022",
+      "active": true,
+      "id": 4
+    },
+    {
+      "name": "The Big 4",
+      "email": "Action/Comedy",
+      "phone": "December 15th, 2022",
+      "active": true,
+      "id": 5
+    },
+    {
+      "name": "xadad",
+      "email": "daadd",
+      "phone": "dada",
+      "active": true,
+      "id": 6
+    }
+  ]
+}
