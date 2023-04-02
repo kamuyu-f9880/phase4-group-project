@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_075202) do
-=======
-ActiveRecord::Schema[7.0].define(version: 2023_04_01_074602) do
->>>>>>> parent of 1dda82a (cleaned up migrations)
+ActiveRecord::Schema[7.0].define(version: 2023_04_02_072147) do
   create_table "actors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -34,18 +30,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_074602) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.text "comments"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
-    t.string "password_digest"
-    t.datetime "confirmed_at"
-    t.index ["email"], name: "index_users_on_email", unique: true
-=======
     t.string "password"
->>>>>>> parent of 1dda82a (cleaned up migrations)
   end
 
 end
