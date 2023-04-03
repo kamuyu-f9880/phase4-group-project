@@ -1,0 +1,43 @@
+.container {
+    margin-top: 2rem;
+}
+
+.card {
+    border: none;
+    background-color: #f8f9fa;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.movie-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.movie-details {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+.movie-genre,
+.movie-release-date {
+    margin: 0.5rem 0;
+}
+
+.back-btn {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
