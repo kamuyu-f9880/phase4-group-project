@@ -1,29 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isLoggedIn }) => {
+const Navbar = ({ isLoggedIn, username }) => {
   return (
     <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/movies">Movies</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        {!isLoggedIn ? (
-          <>
-            <li><Link to="/signup">Sign Up</Link></li>
-            <li><Link to="/login">Log In</Link></li>
-          </>
-        ) : (
-          <>
-            <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/logout">Log Out</Link></li>
-          </>
-        )}
-      </ul>
+      <div className="navbar-brand">
+        <Link to="/">ReelTime</Link>
+      </div>
+      <div className="navbar-menu">
+        <div className="navbar-start">
+          <Link to="/">Home</Link>
+          <Link to="/movies">Movies</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
+        <div className="navbar-end">
+          {isLoggedIn ? (
+            <>
+              <Link to="/profile">{username}</Link>
+              <Link to="/logout">Logout</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/signup">Sign Up</Link>
+              <Link to="/signin">Sign In</Link>
+            </>
+          )}
+        </div>
+      </div>
     </nav>
   );
 };
 
 export default Navbar;
+
 

@@ -1,129 +1,76 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import "./MovieEdit.css";
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
+const EditMovie = () => {
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const history = useHistory();
 
-const MovieEdit = () => {
-    const { empid } = useParams();
+  useEffect(() => {
+    const fetchMovie = async () => {
+      const response = await fetch(`https://reeltime-api.onrender.com/movies/${movieId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      setMovie(data);
+      setTitle(data.title);
+      setDescription(data.description);
+      setDirector(data.director);
+      setYear(data.year);
+    };
+    fetchMovie();
+  }, [movieId]);
 
-    //const [empdata, empdatachange] = useState({});
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
 
-    useEffect(() => {
-        fetch("http://localhost:8000/employee")
-          .then((res) => {
-            return res.json();
-          })
-          .then((resp) => {
-            idchange(resp.id);
-            namechange(resp.name);
-            genrechange(resp.genre);
-            releasedatechange(resp.phone);
-            activechange(resp.isactive);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-    },[empid]);
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
 
-    const[id,idchange]=useState("");
-    const[name,namechange]=useState("");
-    const[genre,genrechange]=useState("");
-    const[releasedate,releasedatechange]=useState("");
-    const[active,activechange]=useState(true);
-    const[validation,valchange]=useState(false);
-
-
-    const navigate=useNavigate();
-
-    const handlesubmit=(e)=>{
-      e.preventDefault();
-      const empdata={id,name,genre,releasedate,active};
-      
-
-      fetch("http://localhost:8000/employee" + empid, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(empdata),
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await fetch(`https://reeltime-api.onrender.com/movies/${movieId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        title,
+        description,
       })
-        .then((res) => {
-          alert("Saved successfully.");
-          navigate("/");
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-
+    });
+    if (response.ok) {
+      history.push(`/movies/${movieId}`);
     }
-    return ( 
-        <div>
+  };
 
-        <div className="row">
-            <div className="offset-lg-3 col-lg-6">
-                <form className="container" onSubmit={handlesubmit}>
+  if (!movie) {
+    return <p>Loading...</p>;
+  }
 
-                    <div className="card" style={{"textAlign":"left"}}>
-                        <div className="card-title">
-                            <h2>Movie Edit</h2>
-                        </div>
-                        <div className="card-body">
-
-                            <div className="row">
-
-                                <div className="col-lg-12">
-                                    <div className="form-group">
-                                        <label>ID</label>
-                                        <input value={id} disabled="disabled" className="form-control"></input>
-                                    </div>
-                                </div>
-
-                                <div className="col-lg-12">
-                                    <div className="form-group">
-                                        <label>Movie</label>
-                                        <input required value={name} onMouseDown={e=>valchange(true)} onChange={e=>namechange(e.target.value)} className="form-control"></input>
-                                    {name.length==0 && validation && <span className="text-danger">Enter the name</span>}
-                                    </div>
-                                </div>
-
-                                <div className="col-lg-12">
-                                    <div className="form-group">
-                                        <label>Genre</label>
-                                        <input value={genre} onChange={e=>genrechange(e.target.value)} className="form-control"></input>
-                                    </div>
-                                </div>
-
-                                <div className="col-lg-12">
-                                    <div className="form-group">
-                                        <label>Release Date</label>
-                                        <input value={releasedate} onChange={e=>releasedatechange(e.target.value)} className="form-control"></input>
-                                    </div>
-                                </div>
-
-                                <div className="col-lg-12">
-                                    <div className="form-check">
-                                    <input checked={active} onChange={e=>activechange(e.target.checked)} type="checkbox" className="form-check-input"></input>
-                                        <label  className="form-check-label">Is Active</label>
-                                        
-                                    </div>
-                                </div>
-                                <div className="col-lg-12">
-                                    <div className="form-group">
-                                       <button className="btn btn-success" type="submit">Save</button>
-                                       <Link to="/" className="btn btn-danger">Back</Link>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </form>
-
-            </div>
-        </div>
+  return (
+    <div>
+      <h2>Edit Movie</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Title:
+          <input type="text" value={title} onChange={handleTitleChange} />
+        </label>
+        <label>
+          Description:
+          <textarea value={description} onChange={handleDescriptionChange} />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
     </div>
-     );
-}
- 
-export default MovieEdit;
+  );
+};
+
+export default EditMovie;
