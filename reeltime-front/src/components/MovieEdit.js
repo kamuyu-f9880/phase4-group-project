@@ -126,4 +126,4 @@ const EmpEdit = () => {
      );
 }
  
-export default EmpEdit;
+export default UserEdit;

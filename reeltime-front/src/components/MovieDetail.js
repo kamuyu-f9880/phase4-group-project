@@ -46,4 +46,4 @@ const EmpDetail = () => {
   );
 };
 
-export default EmpDetail;
+export default MovieDetail;

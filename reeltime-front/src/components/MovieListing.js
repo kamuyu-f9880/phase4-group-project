@@ -88,4 +88,4 @@ const EmpListing = () => {
     );
 }
 
-export default EmpListing;
+export default UserListing;
