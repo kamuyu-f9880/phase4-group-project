@@ -1,56 +1,71 @@
 import React, { useState } from "react";
-import './Login.css';
-import { useNavigate, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-
-
-function Login() {
+const Login = ({ setUser }) => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    fetch("https://reeltime-api.onrender.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        email: email,il
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        history.push("/");
+      })
+      .catch((error) => console.log(error));
   };
-  
-
-function handleClick(){
-    navigate("/home","/searchbox")
-}
-    
- 
 
   return (
     <div>
-      <h2>Login</h2>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username:
+        <div>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
+            id="username"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-        <br />
-        <label>
-          Password:
+        </div>
+        <div>
+          <label htmlFor="email">Username:</label>
+          <input
+            type="text"
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
-        <br />
-        <p className="forgot-password text-right">
-          Not a member <Link to="/Signup">Sign up?</Link>
-        </p>
-        <button onClick={handleClick} type="submit">Login</button>
+        </div>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
-}
+};
+
 
 export default Login;

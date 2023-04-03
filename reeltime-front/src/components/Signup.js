@@ -1,63 +1,57 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-
-function Signup() {
+const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    fetch("https://reeltime-api.onrender.com/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        history.push("/");
+      })
+      .catch((error) => console.log(error));
   };
-
-  function handleClick(){
-
-    navigate("/login")
-
-  }
 
   return (
     <div>
-      <h2>Signup</h2>
+      <h1>Signup</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-         New Username:
+        <div>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
+            id="username"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-        <br />
-        <label>
-          New Password:
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
-        <br />
-        <button onClick={handleClick} type="submit">Signup</button>
+        </div>
+        <button type="submit">Signup</button>
       </form>
-      <p>
-        Already have an account? <Link to="/Login">Login</Link>
-      </p>
     </div>
   );
-}
-
+};
 
 export default Signup

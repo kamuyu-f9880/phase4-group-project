@@ -1,37 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isLoggedIn, username }) => {
+function Navbar({ user, handleLogout, handleSearch }) {
   return (
-    <nav>
-      <div className="navbar-brand">
-        <Link to="/">ReelTime</Link>
+    <nav className="navbar">
+      <Link to="/" className="logo">ReelTime</Link>
+      <div className="search">
+        <input type="text" placeholder="Search movies..." onChange={handleSearch} />
+        <button type="submit">Search</button>
       </div>
-      <div className="navbar-menu">
-        <div className="navbar-start">
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-        </div>
-        <div className="navbar-end">
-          {isLoggedIn ? (
-            <>
-              <Link to="/profile">{username}</Link>
-              <Link to="/logout">Logout</Link>
-            </>
-          ) : (
-            <>
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/signin">Sign In</Link>
-            </>
-          )}
-        </div>
-      </div>
+      <ul className="nav-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/movies">Movies</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        {user ? (
+          <>
+            <li><Link to="/profile">Profile</Link></li>
+            <li><button onClick={handleLogout}>Logout</button></li>
+          </>
+        ) : (
+          <>
+            <li><Link to="/signup">Signup</Link></li>
+            <li><Link to="/login">Login</Link></li>
+          </>
+        )}
+      </ul>
     </nav>
   );
-};
+}
 
 export default Navbar;
+
 
 
