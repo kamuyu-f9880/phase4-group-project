@@ -7,14 +7,14 @@ const MovieListing = () => {
     const navigate = useNavigate();
 
     const LoadDetail = (id) => {
-        navigate("/employee/detail/" + id);
+        navigate("/movies/detail/" + id);
     }
     const LoadEdit = (id) => {
-        navigate("/employee/edit/" + id);
+        navigate("/movies/edit/" + id);
     }
     const Removefunction = (id) => {
         if (window.confirm('Do you want to remove?')) {
-            fetch("http://localhost:8000/employee" + id, {
+            fetch("http://localhost:8000/movies" + id, {
               method: "DELETE",
             })
               .then((res) => {
@@ -50,22 +50,22 @@ const MovieListing = () => {
                 </div>
                 <div className="card-body">
                     <div className="divbtn">
-                        <Link to="employee/create" className="btn btn-success">Add New (+)</Link>
+                        <Link to="movie/create" className="btn btn-success">Add New (+)</Link>
                     </div>
                     <table className="table table-bordered">
                         <thead className="bg-dark text-white">
                             <tr>
                                 <td>ID</td>
                                 <td>Movie Name</td>
-                                <td>Genre</td>
-                                <td>Release Date</td>
+                                <td>Details</td>
+                                <td>Director</td>
                                 <td></td>
                             </tr>
                         </thead>
                         <tbody>
 
-                            {empdata &&
-                                empdata.map(item => (
+                            {moviedata &&
+                                moviedata.map(item => (
                                     <tr key={item.id}>
                                         <td>{item.id}</td>
                                         <td>{item.name}</td>
