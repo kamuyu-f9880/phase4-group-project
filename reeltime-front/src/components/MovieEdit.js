@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "./MovieEdit.css";
 
 
-const EmpEdit = () => {
+const MovieEdit = () => {
     const { empid } = useParams();
 
     //const [empdata, empdatachange] = useState({});

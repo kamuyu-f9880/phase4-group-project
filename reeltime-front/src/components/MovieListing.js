@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./MovieListing.css"
 
-const EmpListing = () => {
+const MovieListing = () => {
     const [empdata, empdatachange] = useState(null);
     const navigate = useNavigate();
 

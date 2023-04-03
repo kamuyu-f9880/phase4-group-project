@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./MovieDetail.css";
 
-const EmpDetail = () => {
+const MovieDetail = () => {
   const { empid } = useParams();
 
   const [empdata, empdatachange] = useState({});

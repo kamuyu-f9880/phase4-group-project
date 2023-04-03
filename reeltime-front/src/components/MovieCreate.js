@@ -42,7 +42,7 @@ const EmpCreate = () => {
 
                         <div className="card" style={{"textAlign":"left"}}>
                             <div className="card-title">
-                                <h2>Employee Create</h2>
+                                <h2>Movie Create</h2>
                             </div>
                             <div className="card-body">
 
@@ -65,14 +65,14 @@ const EmpCreate = () => {
 
                                     <div className="col-lg-12">
                                         <div className="form-group">
-                                            <label>Genre</label>
+                                            <label>Rating</label>
                                             <input value={email} onChange={e=>genrechange(e.target.value)} className="form-control"></input>
                                         </div>
                                     </div>
 
                                     <div className="col-lg-12">
                                         <div className="form-group">
-                                            <label>Release Date</label>
+                                            <label>Review</label>
                                             <input value={phone} onChange={e=>releasedatechange(e.target.value)} className="form-control"></input>
                                         </div>
                                     </div>
