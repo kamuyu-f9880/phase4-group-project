@@ -9,7 +9,7 @@ const MovieEdit = () => {
     //const [empdata, empdatachange] = useState({});
 
     useEffect(() => {
-        fetch("http://localhost:8000/employee" + empid)
+        fetch("http://localhost:8000/employee")
           .then((res) => {
             return res.json();
           })
@@ -23,7 +23,7 @@ const MovieEdit = () => {
           .catch((err) => {
             console.log(err.message);
           });
-    }, []);
+    },[empid]);
 
     const[id,idchange]=useState("");
     const[name,namechange]=useState("");

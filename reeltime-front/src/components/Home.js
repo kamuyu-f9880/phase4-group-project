@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import "./Home.css";
 
 
 function Home(){
@@ -9,6 +8,7 @@ function Home(){
       };
 
     return (
+      
       <div className="search-box-container">
         <i className="search-box-icon fas fa-search"></i>
         <input
@@ -17,6 +17,8 @@ function Home(){
           onChange={handleChange}
           placeholder="Search Movies..."
         />
+        <h1>Movie Listings</h1>
+        <MovieList />
         <h1 className="home-title">HomePage</h1>
       </div>
     );

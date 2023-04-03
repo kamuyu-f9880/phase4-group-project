@@ -1,49 +1,49 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import "./MovieDetail.css";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const MovieDetail = () => {
-  const { empid } = useParams();
-
-  const [empdata, empdatachange] = useState({});
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/employee" + empid)
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        empdatachange(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+    const fetchMovie = async () => {
+      try {
+        const response = await axios.get(`https://reeltime-api.onrender.com/movies/${id}`);
+        setMovie(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+
+    fetchMovie();
+  }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-lg-8">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              {empdata && (
-                <div>
-                  <h2 className="movie-title">{empdata.name}</h2>
-                  <div className="movie-details">
-                    <p className="movie-genre">{empdata.genre}</p>
-                    <p className="movie-release-date">{empdata.releasedate}</p>
-                  </div>
-                  <Link className="btn btn-danger back-btn" to="/">
-                    Back to Listing
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+    <div>
+      <h1>{movie.title}</h1>
+      <p>{movie.description}</p>
+      <p>Director: {movie.director.name}</p>
+      <p>Cast: {movie.actors.map(actor => actor.name).join(', ')}</p>
+      <p>Reviews:</p>
+      <ul>
+        {movie.reviews.map(review => (
+          <li key={review.id}>
+            <p>{review.user.email}</p>
+            <p>{review.content}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 export default MovieDetail;
+

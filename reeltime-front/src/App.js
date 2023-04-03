@@ -1,33 +1,90 @@
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import MovieListing from './components/MovieListing';
-import MovieCreate from './components/MovieCreate';
-import MovieDetail from './components/MovieDetail';
-import MovieEdit from './components/MovieEdit';
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-// import Home from "./Home";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import NavBar from './components/Navbar';
+import Home from './components/Home';
+import MovieList from './components/MovieList';
+import MovieDetails from './components/MovieDetail';
+import About from './components/About';
+import Contact from './components/Contact';
+import SignUp from './components/Signup';
+import LogIn from './components/Login';
+import Profile from './components/Profile';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Reel Time</h1>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/home" element={<MovieListing />}></Route>
-          <Route path="/movies/create" element={<MovieCreate />}></Route>
+class App extends Component {
+  state = {
+    currentUser: null,
+    currentRoute: 'home',
+  };
 
-          <Route path="/movies/detail/:movie_id" element={<MovieDetail />}></Route>
-          <Route path="/movies/edit/:movie_id" element={<MovieEdit />}></Route>
-          <Route path="/signup" element={<Signup />} />
-          <Route exact path="/" element={<Login />} />
-          {/* <Route path="/home" element={<Home />} /> */}
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+  handleLogin = (user) => {
+    this.setState({ currentUser: user });
+  };
 
+  handleLogout = () => {
+    this.setState({ currentUser: null });
+  };
+
+  render() {
+    const { currentUser, currentRoute } = this.state;
+
+    return (
+      <Router>
+        <div className="App">
+          <NavBar
+            currentUser={currentUser}
+            onLogout={this.handleLogout}
+          />
+
+          {currentRoute === 'home' && (
+            <Route exact path="/" render={() => (
+              <Home currentUser={currentUser} />
+            )} />
+          )}
+
+          {currentRoute === 'movieList' && (
+            <Route exact path="/movies" render={() => (
+              <MovieList currentUser={currentUser} />
+            )} />
+          )}
+
+          {currentRoute === 'movieDetails' && (
+            <Route path="/movies/:id" render={(props) => (
+              <MovieDetails
+                {...props}
+                currentUser={currentUser}
+              />
+            )} />
+          )}
+
+          {currentRoute === 'about' && (
+            <Route path="/about" component={About} />
+          )}
+
+          {currentRoute === 'contact' && (
+            <Route path="/contact" component={Contact} />
+          )}
+
+          {currentRoute === 'signUp' && (
+            <Route path="/signup" render={() => (
+              <SignUp onLogin={this.handleLogin} />
+            )} />
+          )}
+
+          {currentRoute === 'logIn' && (
+            <Route path="/login" render={() => (
+              <LogIn onLogin={this.handleLogin} />
+            )} />
+          )}
+
+          {currentRoute === 'profile' && (
+            <Route path="/profile" render={() => (
+              <Profile currentUser={currentUser} />
+            )} />
+          )}
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

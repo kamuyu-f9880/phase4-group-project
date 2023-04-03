@@ -51,7 +51,7 @@ const EmpCreate = () => {
                                     <div className="col-lg-12">
                                         <div className="form-group">
                                             <label>ID</label>
-                                            <input value={id} disabled="disabled" className="form-control"></input>
+                                            <input value={id} onChange={e=>idchange(e.target.value)} disabled="disabled" className="form-control"></input>
                                         </div>
                                     </div>
 
