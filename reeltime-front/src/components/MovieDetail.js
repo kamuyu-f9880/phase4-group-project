@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import "./EmpDetails.css";
+import "./MovieDetail.css";
 
 const EmpDetail = () => {
   const { empid } = useParams();

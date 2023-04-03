@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./EmpListing.css"
+import "./MovieListing.css"
 
 const EmpListing = () => {
     const [empdata, empdatachange] = useState(null);
@@ -88,4 +88,4 @@ const EmpListing = () => {
     );
 }
 
-export default UserListing;
+export default MovieListing;

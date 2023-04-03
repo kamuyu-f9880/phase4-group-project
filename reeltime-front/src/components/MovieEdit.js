@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./EmpEdit.css";
+import "./MovieEdit.css";
 
 
 const EmpEdit = () => {
@@ -126,4 +126,4 @@ const EmpEdit = () => {
      );
 }
  
-export default UserEdit;
+export default MovieEdit;

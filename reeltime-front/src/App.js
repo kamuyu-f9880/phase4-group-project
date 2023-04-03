@@ -3,9 +3,9 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import MovieListing from './components/MovieListing';
 import MovieCreate from './components/MovieCreate';
-import MovieDetail from '.components//UserDetail';
+import MovieDetail from './components/MovieDetail';
 import MovieEdit from './components/MovieEdit';
-import Login from "./Login";
+import Login from "./components/Login";
 import Signup from "./components/Signup";
 // import Home from "./Home";
 
@@ -16,10 +16,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MovieListing />}></Route>
-          <Route path="/employee/create" element={<MovieCreate />}></Route>
+          <Route path="/movies/create" element={<MovieCreate />}></Route>
 
-          <Route path="/employee/detail/:movie_id" element={<MovieDetail />}></Route>
-          <Route path="/employee/edit/:movie_id" element={<MovieEdit />}></Route>
+          <Route path="/movies/detail/:movie_id" element={<MovieDetail />}></Route>
+          <Route path="/movies/edit/:movie_id" element={<MovieEdit />}></Route>
           <Route path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           {/* <Route path="/home" element={<Home />} /> */}
