@@ -7,14 +7,14 @@ const MovieListing = () => {
     const navigate = useNavigate();
 
     const LoadDetail = (id) => {
-        navigate("/employee/detail/" + id);
+        navigate("/movie/detail/" + id);
     }
     const LoadEdit = (id) => {
-        navigate("/employee/edit/" + id);
+        navigate("/movie/edit/" + id);
     }
     const Removefunction = (id) => {
         if (window.confirm('Do you want to remove?')) {
-            fetch("http://localhost:8000/employee" + id, {
+            fetch(" http://localhost:8000/movies" + id, {
               method: "DELETE",
             })
               .then((res) => {
@@ -31,17 +31,15 @@ const MovieListing = () => {
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/employee")
-          .then((res) => {
-            return res.json();
-          })
-          .then((resp) => {
-            empdatachange(resp);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-    }, [])
+      fetch("http://localhost:8000/movies")
+        .then((res) => res.json())
+        .then((data) => {
+          empdatachange(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
     return (
         <div className="container">
             <div className="card">
@@ -50,7 +48,7 @@ const MovieListing = () => {
                 </div>
                 <div className="card-body">
                     <div className="divbtn">
-                        <Link to="employee/create" className="btn btn-success">Add New (+)</Link>
+                        <Link to="movie/create" className="btn btn-success">Add New (+)</Link>
                     </div>
                     <table className="table table-bordered">
                         <thead className="bg-dark text-white">

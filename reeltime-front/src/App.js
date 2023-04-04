@@ -15,12 +15,13 @@ function App() {
       <h1>Reel Time</h1>
       <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<MovieListing />}></Route>
-          <Route path="/movies/create" element={<MovieCreate />}></Route>
+          <Route path="/home" element={<MovieListing />}/>
+          <Route path="/movie/create" element={<MovieCreate />} />
 
-          <Route path="/movies/detail/:movie_id" element={<MovieDetail />}></Route>
-          <Route path="/movies/edit/:movie_id" element={<MovieEdit />}></Route>
+          <Route path="/movie/detail/:movie_id" element={<MovieDetail />}/>
+          <Route path="/movie/edit/:movie_id" element={<MovieEdit />}/>
           <Route path="/signup" element={<Signup />} />
+          
           <Route exact path="/" element={<Login />} />
           {/* <Route path="/home" element={<Home />} /> */}
         </Routes>

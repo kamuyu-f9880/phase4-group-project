@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const EmpCreate = () => {
+const MovieCreate = () => {
 
     const[id,idchange]=useState("");
     const[name,namechange]=useState("");
@@ -18,7 +18,7 @@ const EmpCreate = () => {
       const empdata={name,email,phone,active};
       
 
-      fetch("http://localhost:8000/employee", {
+      fetch("http://localhost:8000/movies", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(empdata),
@@ -105,4 +105,4 @@ const EmpCreate = () => {
     );
 }
 
-export default EmpCreate;
+export default MovieCreate;

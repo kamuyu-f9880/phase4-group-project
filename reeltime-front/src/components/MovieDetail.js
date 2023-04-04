@@ -8,7 +8,7 @@ const MovieDetail = () => {
   const [empdata, empdatachange] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:8000/employee" + empid)
+    fetch(" http://localhost:8000/movies" + empid)
       .then((res) => {
         return res.json();
       })
