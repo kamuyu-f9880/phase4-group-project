@@ -12,7 +12,7 @@ import Signup from "./components/Signup";
 function App() {
   return (
     <div className="App">
-      <h1>Reel Time</h1>
+      {/* <h1>Reel Time</h1> */}
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MovieListing />}></Route>

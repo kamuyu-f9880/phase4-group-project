@@ -3,17 +3,17 @@ import { Link, useParams } from "react-router-dom";
 import "./MovieDetail.css";
 
 const MovieDetail = () => {
-  const { empid } = useParams();
+  const { movieid } = useParams();
 
-  const [empdata, empdatachange] = useState({});
+  const [moviedata, moviedatachange] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:8000/employee" + empid)
+    fetch("http://localhost:3000/movies")
       .then((res) => {
         return res.json();
       })
       .then((resp) => {
-        empdatachange(resp);
+        moviedatachange(resp);
       })
       .catch((err) => {
         console.log(err.message);
@@ -28,9 +28,9 @@ const MovieDetail = () => {
             <div className="card-body">
               {empdata && (
                 <div>
-                  <h2 className="movie-title">{empdata.name}</h2>
+                  <h2 className="movie-title">{moviedata.name}</h2>
                   <div className="movie-details">
-                    <p className="movie-genre">{empdata.genre}</p>
+                    <p className="movie-genre">{moviedata.director}</p>
                     <p className="movie-release-date">{empdata.releasedate}</p>
                   </div>
                   <Link className="btn btn-danger back-btn" to="/">
