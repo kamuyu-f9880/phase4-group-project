@@ -1,2 +1,3 @@
 # Reeltime-API
-api to the reeltime project
+
+This is the back end for the 
