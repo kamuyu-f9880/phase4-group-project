@@ -1,6 +1,7 @@
 This repository hosts Group 43 Code challenge for the Phase 4 Group Project.
 This includes the front end within the reeltime-front folder and the back end within the reelTime-api folder.
 
+Deployment link: https://phase4-group-project-reeltime.vercel.app/
 
 ## Group Members:
 
